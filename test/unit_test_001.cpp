@@ -71,14 +71,14 @@ unittest(test_wavelength)
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
   fprintf(stderr,"\n");
 
-  for (int wl = 300; wl < 1200; wl += 100)
+  for (int wl = 300; wl < 1150; wl += 50)
   {
     mysensor.setWavelength(wl);
     assertEqual(wl, mysensor.getWavelength() );
   }
 
   fprintf(stderr, "\n\tWavelen\tfactor\n");
-  for (int wl = 300; wl < 1200; wl += 50)
+  for (int wl = 300; wl < 1150; wl += 50)
   {
     mysensor.setWavelength(wl);
     fprintf(stderr, "\t%d\t %1.3f\n", wl, mysensor.getWaveLengthFactor() );
