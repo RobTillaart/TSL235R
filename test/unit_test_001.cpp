@@ -115,14 +115,14 @@ unittest(test_conversion)
     
   for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
   {
-    float rad = mysensor.irradiance(hz);
+    float rad = mysensor.irradiance(Hz);
     assertEqualFloat(0.00142 * Hz, mysensor.irradiance(Hz), 0.001);
   }
 
   for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
   {
-    float rad1 = mysensor.irradiance(hz);
-    float rad2 = mysensor.irradiance(hz * 10, 10000);  // 10 seconds 10 times as many pulses
+    float rad1 = mysensor.irradiance(Hz);
+    float rad2 = mysensor.irradiance(Hz * 10, 10000);  // 10 seconds 10 times as many pulses
     assertEqualFloat(rad1, rad2, 0.001);
   }
 
