@@ -5,6 +5,10 @@
 // PURPOSE: demo
 //    DATE: 2021-05-29
 
+// Note the max number of interrupt an Arduino UNO can handle 
+// is in the order of 20000.
+
+
 //
 // Digital Pin layout ARDUINO
 // =============================
