@@ -52,11 +52,10 @@ unittest(test_constructor)
   fprintf(stderr, "VERSION: %s\n", TSL235R_LIB_VERSION);
 
   TSL235R mysensor;
-  assertEqual(635, mysensor.getWaveLength() );
+  assertEqual(635, mysensor.getWavelength() );
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
-  assertEqualFloat(5.0, mysensor.getVoltage), 0.001);
+  assertEqualFloat(5.0, mysensor.getVoltage(), 0.001);
   assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
-  assertEqualFloat(5.0, mysensor.getVoltage), 0.001);
 }
 
 
@@ -65,13 +64,13 @@ unittest(test_wavelength)
   fprintf(stderr, "VERSION: %s\n", TSL235R_LIB_VERSION);
 
   TSL235R mysensor;
-  assertEqual(635, mysensor.getWaveLength() );
+  assertEqual(635, mysensor.getWavelength() );
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
 
   for (int wl = 300; wl < 1200; wl += 100)
   {
     mysensor.setWavelength(wl);
-    assertEqual(wl, mysensor.getWaveLength() );
+    assertEqual(wl, mysensor.getWavelength() );
   }
 
   for (int wl = 300; wl < 1200; wl += 100)
@@ -81,7 +80,7 @@ unittest(test_wavelength)
   }
 
   mysensor.setWavelength();
-  assertEqual(635, mysensor.getWaveLength() );
+  assertEqual(635, mysensor.getWavelength() );
 }
 
 
@@ -89,9 +88,9 @@ unittest(test_voltage)
 {
   fprintf(stderr, "VERSION: %s\n", TSL235R_LIB_VERSION);
 
-  TSL235R mysensor;
-  assertEqualFloat(5.0, mysensor.getVoltage(), 0.001);
-  assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
+  TSL235R mysensor(2.7);
+  assertEqualFloat(2.7, mysensor.getVoltage(), 0.001);
+  assertEqualFloat(0.988, mysensor.getVoltageFactor(), 0.001);
 
   for (float volts = 2.7; volts < 5.5; volts += 0.1)
   {
@@ -102,7 +101,7 @@ unittest(test_voltage)
   for (float volts = 2.7; volts < 5.5; volts += 0.1)
   {
     mysensor.setVoltage(volts);
-    fprintf(stderr, "%1,1f\t %1.3f\n", wl, mysensor.getVoltageFactor() );
+    fprintf(stderr, "%1,1f\t %1.3f\n", volts, mysensor.getVoltageFactor() );
   }
 
   mysensor.setVoltage();
@@ -127,7 +126,7 @@ unittest(test_conversion)
   for (uint32_t hz = 10; hz < 1000000; hz *= 2)
   {
     float rad = mysensor.irradiance(hz);
-    fprintf(stderr, "%ld\t %1.3f\n",(hz, mysensor.irradiance(hz));
+    fprintf(stderr, "%ld\t %1.3f\n", hz, mysensor.irradiance(hz));
   }
   fprintf(stderr, "\ndone...");
 }
