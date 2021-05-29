@@ -43,6 +43,7 @@ NOte that Hz implies the measured pulses for 1 second.
 - **float irradiance(uint32_t pulses, uint32_t milliseconds)** returns the irradiance in uW/cm2
 This formula is used for other duration than 1 second.
 To get irradiance in W/m2 one must divide by 100.
+- **float getFactor()** returns the inner conversion factor from Hz to Watt/cm2.
 - **void setWavelength(uint16_t wavelength = 635)** sets the wavelength so the formulas can use a correction factor. At the default wavelength of 635 nm the wavelength correction factor == 1.0
 - **uint16_t getWavelength()** returns the set wavelength. Convenience function.
 - **float getWaveLengthFactor()** returns the wavelength correction factor. 

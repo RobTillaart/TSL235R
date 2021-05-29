@@ -19,6 +19,7 @@ public:
 
   float    irradiance(uint32_t Hz);
   float    irradiance(uint32_t pulses, uint32_t milliseconds);
+  float    getFactor()           { return _factor; };
 
   void     setWavelength(uint16_t wavelength = 635);
   uint16_t getWavelength()       { return _waveLength; }
