@@ -26,7 +26,7 @@ float TSL235R::irradiance(uint32_t Hz)
 
 float TSL235R::irradiance(uint32_t pulses, uint32_t milliseconds)
 {
-  return pulses * 1000.0 * _factor / milliseconds;
+  return (pulses * 1000.0 * _factor) / milliseconds;
 }
 
 

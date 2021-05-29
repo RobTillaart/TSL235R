@@ -66,6 +66,7 @@ unittest(test_wavelength)
   TSL235R mysensor;
   assertEqual(635, mysensor.getWavelength() );
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
+  fprintf(stderr,"\n");
 
   for (int wl = 300; wl < 1200; wl += 100)
   {
@@ -89,6 +90,7 @@ unittest(test_voltage)
   TSL235R mysensor(2.7);
   assertEqualFloat(2.7, mysensor.getVoltage(), 0.001);
   assertEqualFloat(0.988, mysensor.getVoltageFactor(), 0.001);
+  fprintf(stderr,"\n");
 
   for (float volts = 2.7; volts < 5.5; volts += 0.1)
   {
@@ -112,12 +114,22 @@ unittest(test_conversion)
   TSL235R mysensor;
   assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
-    
+  fprintf(stderr,"\n");
+
   for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
   {
     float rad = mysensor.irradiance(Hz);
     assertEqualFloat(0.00142 * Hz, mysensor.irradiance(Hz), 0.001);
   }
+}
+
+
+unittest(test_conversion)
+{
+  TSL235R mysensor;
+  assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
+  assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
+  fprintf(stderr,"\n");
 
   for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
   {
