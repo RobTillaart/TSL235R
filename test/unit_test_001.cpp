@@ -60,7 +60,7 @@ unittest(test_constructor)
   assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
   assertEqualFloat(0.00142, mysensor.getFactor(), 0.001);
 
-  fprintf(stderr, "%1.6f\n", wl, mysensor.getFactor() );
+  fprintf(stderr, "%1.6f\n", mysensor.getFactor() );
 }
 
 
@@ -118,7 +118,7 @@ unittest(test_conversion1)
   assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
 
-  fprintf(stderr, "%1.6f\n", wl, mysensor.getFactor() );
+  fprintf(stderr, "%1.6f\n", mysensor.getFactor() );
   fprintf(stderr,"\n");
 
   for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
