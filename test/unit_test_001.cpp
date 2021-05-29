@@ -109,7 +109,7 @@ unittest(test_voltage)
 }
 
 
-unittest(test_conversion)
+unittest(test_conversion1)
 {
   TSL235R mysensor;
   assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
@@ -124,7 +124,7 @@ unittest(test_conversion)
 }
 
 
-unittest(test_conversion)
+unittest(test_conversion2)
 {
   TSL235R mysensor;
   assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
