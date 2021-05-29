@@ -10,13 +10,15 @@
 
 #include "Arduino.h"
 
+
 class TSL235R
 {
 public:
 
   TSL235R(float voltage = 5.0);
 
-  float    irradiance(uint32_t hz);
+  float    irradiance(uint32_t Hz);
+  float    irradiance(uint32_t pulses, uint32_t milliseconds);
 
   void     setWavelength(uint16_t wavelength = 635);
   uint16_t getWavelength()       { return _waveLength; }

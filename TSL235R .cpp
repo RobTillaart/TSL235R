@@ -17,9 +17,16 @@ TSL235R::TSL235R(float voltage)
   calculateFactor();
 }
 
-float TSL235R::irradiance(uint32_t hz)
+
+float TSL235R::irradiance(uint32_t Hz)
 {
-  return hz * _factor;
+  return Hz * _factor;
+}
+
+
+float TSL235R::irradiance(uint32_t pulses, uint32_t milliseconds)
+{
+  return pulses * 1000.0 * _factor / milliseconds;
 }
 
 
@@ -38,8 +45,14 @@ void TSL235R::setVoltage(float voltage)
 
 void TSL235R::calculateFactor()
 {
-  const float cf = 1.2;
+  // figure 1 datasheet
+  // 1 Khz crosses the line at 35/230 between 1 and 10.
+  // so the correctiion factor is 10^0.15217 = 1.419659 = 1.42
+  // as the graph is in kHz we need to correct a factor 1000
+  // as the irradiance function gets Hz
+  const float cf = 0.00142;
   _waveLengthFactor = calcWLF(_waveLength);
+
   _voltageFactor = 0.988 + (_voltage - 2.7) * (0.015 / 2.8);
   _factor = cf * _waveLengthFactor * _voltageFactor;
 }
@@ -48,7 +61,8 @@ void TSL235R::calculateFactor()
 float TSL235R::calcWLF(uint16_t _waveLength)
 {
   // figure 2 datasheet
-  // 635 nm is reference
+  // 635 nm is reference 1.000
+  // remaining is linear interpolated between points in the graph
   float in[]  = { 300, 350,  400, 500,  600,  635,  700,  750,  800,  850,  900,  1000, 1100};
   float out[] = { 0.1, 0.35, 0.5, 0.75, 0.93, 1.00, 1.15, 1.20, 1.15, 1.10, 0.95, 0.40, 0.10};
   return 1.0 / multiMap(_waveLength, in, out, 13);

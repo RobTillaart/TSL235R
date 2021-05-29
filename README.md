@@ -6,18 +6,26 @@
 
 # TSL235R
 
-Arduino library for the TSL235R light to frequency convertor
+Arduino library for the TSL235R light to frequency convertor.
 
 
 ## Description
 
-This library does not measure the frequency but has some functionsto compensate e.g. 
-for wavelength.
+This library does not measure the frequency but has some functions to compensate e.g. 
+for wavelength and voltage used.
 
 The library is not tested extensively yet.
 
+The sensor operating voltage is between 2.7 and 5.5 max.
 
-## Connector
+For measurements below 1uW/cm2 one bests measures for multiple seconds
+Above 1 uW/cm2 1 second or shorter is OK. 
+
+Note that for longer and shorter measurements than 1 second one must convert the
+value to Hz, which is the nr of pulses in 1 second.
+
+
+## Connection
 
 ```
 // PIN 1 - GND
@@ -28,18 +36,28 @@ The library is not tested extensively yet.
 
 ## Interface
 
-- **TSL235R(float voltage = 5.0)** constructor
-- **float irradiance(uint32_t hz)**
-
-- **void setWavelength(uint16_t wavelength)** sets the wavelength so the formulas can use a correction factor.
-- **uint16_t getWavelength()** returns the set wavelength
-- **float getWaveLengthFactor()** returns the correction factor
-
-  // voltage gives a small compensation ( < 1.5% )
+- **TSL235R(float voltage = 5.0)** constructor, optionally one can give the operational voltage 
+to add a small correction (< 1.5%)
+- **float irradiance(uint32_t Hz)** returns the irradiance in uW/cm2.
+NOte that Hz implies the measured pulses for 1 second.
+- **float irradiance(uint32_t pulses, uint32_t milliseconds)** returns the irradiance in uW/cm2
+This formula is used for other duration than 1 second.
+To get irradiance in W/m2 one must divide by 100.
+- **void setWavelength(uint16_t wavelength = 635)** sets the wavelength so the formulas can use a correction factor. At the default wavelength of 635 nm the wavelength correction factor == 1.0
+- **uint16_t getWavelength()** returns the set wavelength. Convenience function.
+- **float getWaveLengthFactor()** returns the wavelength correction factor. 
+As the sensor is most sensitive around 750 nm this value helps to normalize the signal.
+This works only for (almost) monochomatic light.
 - **void setVoltage(float voltage)** sets the voltage so the formulas can use a correction factor.
-- **float getVoltage()**
+This voltage correction factor is rather small < 1.5%
+- **float getVoltage()** returns the set voltage. Convenience function.
 
 
 ## Operations
 
 See examples for typical usage.
+
+
+## Future
+
+- investigate correction factor for white light and mixed light sources.

@@ -42,9 +42,11 @@ unittest_setup()
 }
 
 
+
 unittest_teardown()
 {
 }
+
 
 
 unittest(test_constructor)
@@ -61,8 +63,6 @@ unittest(test_constructor)
 
 unittest(test_wavelength)
 {
-  fprintf(stderr, "VERSION: %s\n", TSL235R_LIB_VERSION);
-
   TSL235R mysensor;
   assertEqual(635, mysensor.getWavelength() );
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
@@ -86,8 +86,6 @@ unittest(test_wavelength)
 
 unittest(test_voltage)
 {
-  fprintf(stderr, "VERSION: %s\n", TSL235R_LIB_VERSION);
-
   TSL235R mysensor(2.7);
   assertEqualFloat(2.7, mysensor.getVoltage(), 0.001);
   assertEqualFloat(0.988, mysensor.getVoltageFactor(), 0.001);
@@ -111,23 +109,23 @@ unittest(test_voltage)
 
 unittest(test_conversion)
 {
-  fprintf(stderr, "VERSION: %s\n", TSL235R_LIB_VERSION);
-
   TSL235R mysensor;
   assertEqualFloat(1.0, mysensor.getVoltageFactor(), 0.001);
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
     
-  for (uint32_t hz = 10; hz < 1000000; hz *= 2)
+  for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
   {
     float rad = mysensor.irradiance(hz);
-    assertEqualFloat(1.2 * hz, mysensor.getVoltageFactor(), 0.001);
+    assertEqualFloat(0.00142 * Hz, mysensor.irradiance(Hz), 0.001);
   }
 
-  for (uint32_t hz = 10; hz < 1000000; hz *= 2)
+  for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
   {
-    float rad = mysensor.irradiance(hz);
-    fprintf(stderr, "%ld\t %1.3f\n", hz, mysensor.irradiance(hz));
+    float rad1 = mysensor.irradiance(hz);
+    float rad2 = mysensor.irradiance(hz * 10, 10000);  // 10 seconds 10 times as many pulses
+    assertEqualFloat(rad1, rad2, 0.001);
   }
+
   fprintf(stderr, "\ndone...");
 }
 
