@@ -77,8 +77,8 @@ unittest(test_wavelength)
     assertEqual(wl, mysensor.getWavelength() );
   }
 
-  fprintf(stderr, "\tWavelen\tfactor\n");
-  for (int wl = 300; wl < 1200; wl += 100)
+  fprintf(stderr, "\n\tWavelen\tfactor\n");
+  for (int wl = 300; wl < 1200; wl += 50)
   {
     mysensor.setWavelength(wl);
     fprintf(stderr, "\t%d\t %1.3f\n", wl, mysensor.getWaveLengthFactor() );
@@ -103,7 +103,7 @@ unittest(test_voltage)
     assertEqualFloat(volts, mysensor.getVoltage(), 0.001);
   }
 
-  fprintf(stderr, "\tVolts\tfactor\n");
+  fprintf(stderr, "\n\tVolts\tfactor\n");
   for (float volts = 2.7; volts < 5.5; volts += 0.1)
   {
     mysensor.setVoltage(volts);
