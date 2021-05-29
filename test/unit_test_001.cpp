@@ -124,7 +124,7 @@ unittest(test_conversion1)
   for (uint32_t Hz = 10; Hz < 1000000; Hz *= 2)
   {
     float rad = mysensor.irradiance(Hz);
-    assertEqualFloat(0.00142 * Hz, mysensor.irradiance(Hz), 0.001);
+    assertEqualFloat(0.00142 * Hz, mysensor.irradiance(Hz), 0.001 * Hz);  // we must have a relative error here!
   }
 }
 
