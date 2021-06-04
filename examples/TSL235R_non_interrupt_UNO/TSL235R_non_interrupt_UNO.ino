@@ -1,9 +1,18 @@
 //
 //    FILE: TSL235R_non_interrupt_UNO.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.0
-// PURPOSE: demo polling
+// VERSION: 0.1.1
+// PURPOSE: demo polling with direct port access
 //    DATE: 2021-06-03
+
+// NOTE
+// This code will work up to ~1700 kHz (3800 uW/cm2) on an Arduino UNO
+// above that pulses come in faster than the code can reliably handle
+
+// NOTE
+// - the code is UNO specific as it uses low level PORT manipulations
+// - the code is blocking and not suitable for low level of radiance.
+
 
 //
 // Digital Pin layout ARDUINO
@@ -20,10 +29,6 @@
 
 
 TSL235R  mySensor;
-
-uint16_t cnt = 0;
-uint32_t start = 0;
-uint32_t duration = 0;
 
 
 ///////////////////////////////////////////////////////////////////
@@ -42,21 +47,22 @@ void setup()
 
 void loop()
 {
-  cnt = 0;
-  start = micros();
-  while (cnt < 50000)
+  uint16_t cnt = 0;
+  uint32_t start = millis()();
+  while (cnt < 60000)
   {
-    while ((PIND & 0x04) == 0x04);   // wait for LOW
+    while (PIND & 0x04);             // wait for LOW
     cnt++;
     while ((PIND & 0x04) == 0x00);   // wait for HIGH
   }
-  duration = micros() - start;
+  uint32_t duration = micros() - start;
   float freq = (1e6 * cnt) / duration;
-  Serial.print("FREQ:\t");
-  Serial.println(freq, 4);
 
-  Serial.print("irradiance:\t");
-  Serial.print(mySensor.irradiance(cnt * 1000, duration));
+  Serial.print("Hz: ");
+  Serial.print(freq);
+  Serial.print("\t");
+  Serial.print(mySensor.irradiance_HS(cnt, duration));
+  // Serial.print(mySensor.irradiance(freq));
   Serial.println(" uW/cm2");
 }
 
