@@ -48,7 +48,7 @@ void setup()
 void loop()
 {
   uint16_t cnt = 0;
-  uint32_t start = millis()();
+  uint32_t start = micros();
   while (cnt < 60000)
   {
     while (PIND & 0x04);             // wait for LOW
