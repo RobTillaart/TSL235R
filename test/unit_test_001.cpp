@@ -29,6 +29,7 @@
 // assertNAN(arg);                                 // isnan(a)
 // assertNotNAN(arg);                              // !isnan(a)
 
+
 #include <ArduinoUnitTests.h>
 
 
@@ -36,11 +37,9 @@
 #include "TSL235R.h"
 
 
-
 unittest_setup()
 {
 }
-
 
 
 unittest_teardown()
@@ -48,10 +47,9 @@ unittest_teardown()
 }
 
 
-
 unittest(test_constructor)
 {
-  fprintf(stderr, "VERSION: %s\n", TSL235R_LIB_VERSION);
+  fprintf(stderr, "\nTSL235R_LIB_VERSION: %s\n", (char *) TSL235R_LIB_VERSION);
 
   TSL235R mysensor;
   assertEqual(635, mysensor.getWavelength() );
