@@ -18,7 +18,7 @@ public:
   TSL235R(float voltage = 5.0);
 
   float    irradiance(uint32_t Hz);
-  float    irradiance(uint32_t pulses, uint32_t milliseconds);  // obsolete?
+  float    irradiance(uint32_t pulses, uint32_t milliseconds);     // obsolete?
   float    irradiance_HS(uint32_t pulses, uint32_t microseconds);
   float    getFactor()           { return _factor; };
 
@@ -39,7 +39,7 @@ private:
 
   void     calculateFactor();
   float    calcWLF(uint16_t _waveLength);
-  float    multiMap(float val, float * _in, float * _out, uint8_t size);
+  float    multiMap(float value, float * _in, float * _out, uint8_t size);
 };
 
 

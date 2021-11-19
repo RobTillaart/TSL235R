@@ -25,15 +25,15 @@
 
 TSL235R  mySensor;
 
-volatile uint32_t cnt = 0;
-uint32_t oldcnt = 0;
+volatile uint32_t count = 0;
+uint32_t oldCount = 0;
 uint32_t t = 0;
 uint32_t lastMeasurement = 0;
 
 
 void count_irq()
 {
-  cnt++;
+  count++;
 }
 
 
@@ -59,9 +59,9 @@ void loop()
   if (now - lastMeasurement >= 1000)
   {
     lastMeasurement = now;
-    t = cnt;
-    uint32_t Hz = t - oldcnt;
-    oldcnt = t;
+    t = count;
+    uint32_t Hz = t - oldCount;
+    oldCount = t;
     
     Serial.print("Hz: ");
     Serial.print(Hz);
@@ -71,4 +71,6 @@ void loop()
   }
 }
 
+
 // -- END OF FILE --
+

@@ -41,6 +41,7 @@ void count_irq1()
   cnt1++;
 }
 
+
 void count_irq2()
 {
   cnt2++;
@@ -89,4 +90,6 @@ void loop()
   }
 }
 
+
 // -- END OF FILE --
+
