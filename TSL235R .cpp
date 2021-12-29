@@ -1,12 +1,13 @@
 //
 //    FILE: TSL235R.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
+// VERSION: 0.1.2
 // PURPOSE: library for the TSL235R light to frequency convertor
 //
 //  HISTORY:
 //  0.1.0   2020-05-29  initial version
 //  0.1.1   2020-06-03  add irradiance_HS()
+//  0.1.2   2021-12-29  update build-CI, readme, library.json, license, minor edits
 
 
 #include "TSL235R.h"
@@ -96,5 +97,5 @@ float TSL235R::multiMap(float value, float * _in, float * _out, uint8_t size)
 }
 
 
-
 // -- END OF FILE --
+

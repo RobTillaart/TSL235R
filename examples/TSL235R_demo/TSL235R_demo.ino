@@ -1,16 +1,13 @@
 //
 //    FILE: TSL235R_demo.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
 // PURPOSE: demo
 //    DATE: 2021-05-29
-
-
+//
 // NOTE
 // This code will work up to ~150KHz on an Arduino UNO
 // above that frequency the interrupt saturate the processor.
-
-
+//
 // Digital Pin layout ARDUINO
 // =============================
 //  2     IRQ 0    - to TSL235R
@@ -37,10 +34,6 @@ void count_irq()
 }
 
 
-///////////////////////////////////////////////////////////////////
-//
-// SETUP
-//
 void setup()
 {
   Serial.begin(115200);

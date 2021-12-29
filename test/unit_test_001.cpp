@@ -39,6 +39,7 @@
 
 unittest_setup()
 {
+  fprintf(stderr, "TSL235R_LIB_VERSION: %s\n", (char *) TSL235R_LIB_VERSION);
 }
 
 
@@ -49,8 +50,6 @@ unittest_teardown()
 
 unittest(test_constructor)
 {
-  fprintf(stderr, "\nTSL235R_LIB_VERSION: %s\n", (char *) TSL235R_LIB_VERSION);
-
   TSL235R mysensor;
   assertEqual(635, mysensor.getWavelength() );
   assertEqualFloat(1.0, mysensor.getWaveLengthFactor(), 0.001);
