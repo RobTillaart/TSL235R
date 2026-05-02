@@ -85,7 +85,7 @@ void loop()
 
     noInterrupts();
     t = cnt2;
-    Interrupts();
+    interrupts();
     Hz = t - oldcnt2;
     oldcnt2 = t;
     Serial.print("irradiance 650 nm:\t");
